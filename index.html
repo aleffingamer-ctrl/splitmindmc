@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="SPLITMIND — vídeos, ideias e outras perspectivas.">
+<title>SPLITMIND® — Beyond the frame</title>
+<style>
+:root{--bg:#080808;--fg:#f2f2ef;--muted:#858585;--line:#282828;--panel:#101010;--max:1280px;--ease:cubic-bezier(.2,.75,.25,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,Arial,Helvetica,sans-serif;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#f2f2ef;color:#080808}
+.wrap{width:min(var(--max),calc(100% - 64px));margin-inline:auto}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:30}
+.brand{font-weight:900;font-size:18px;letter-spacing:-1px}
+.brand span{font-weight:400;color:#777}
+.navlinks{display:flex;align-items:center;gap:32px;font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:#aaa}
+.navlinks a{transition:color .25s}.navlinks a:hover{color:white}
+.nav-cta{border:1px solid #5a5a5a;padding:12px 16px;color:white!important}
+.menu-toggle{display:none;background:none;border:0;color:white;font-size:24px}
+.hero{min-height:calc(100svh - 78px);display:flex;flex-direction:column;justify-content:center;position:relative;padding:80px 0 46px;overflow:hidden}
+.hero-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#f2f2ef;margin-right:8px;box-shadow:0 0 12px #fff}
+.hero-title{font-size:clamp(76px,15.7vw,220px);line-height:.76;letter-spacing:-.105em;font-weight:900;margin:0 0 44px;position:relative;z-index:2}
+.hero-title .line{display:block;overflow:hidden;padding:0 .09em .11em 0}
+.hero-title .line span{display:inline-block;transform:translateY(115%);animation:rise 1.15s var(--ease) forwards}
+.hero-title .line:nth-child(2) span{animation-delay:.15s}
+.hero-title .outline{color:transparent;-webkit-text-stroke:1px #f2f2ef}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;position:relative;z-index:2}
+.hero-copy{font-size:clamp(15px,1.5vw,20px);line-height:1.5;color:#b8b8b8;max-width:390px}
+.hero-copy strong{color:white;font-weight:500}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:22px;padding:15px 18px;border:1px solid #eee;background:#eee;color:#080808;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;transition:background .25s,color .25s,transform .25s}
+.btn:hover{background:#080808;color:white;transform:translateY(-3px)}
+.btn.secondary{background:transparent;color:white;border-color:#424242}
+.btn.secondary:hover{background:white;color:#080808}
+.arrow{font-size:17px;line-height:0}
+.hero-mark{position:absolute;right:7%;top:20%;width:min(32vw,420px);aspect-ratio:1;border:1px solid #252525;border-radius:50%;opacity:.55;animation:spin 35s linear infinite}
+.hero-mark:before,.hero-mark:after{content:"";position:absolute;inset:13%;border:1px solid #252525;border-radius:50%}
+.hero-mark:after{inset:29%;border-style:dashed}
+.hero-mark i{position:absolute;left:50%;top:-4px;width:1px;height:calc(100% + 8px);background:#303030;transform:rotate(42deg)}
+.scroll-note{position:absolute;left:0;bottom:25px;color:#696969;font-size:9px;letter-spacing:2px;text-transform:uppercase;display:flex;gap:12px;align-items:center}
+.scroll-note:before{content:"";height:1px;width:35px;background:#777}
+.section{padding:112px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:42px}
+.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#888;margin:0 0 18px}
+h2{font-size:clamp(42px,7vw,88px);line-height:.94;letter-spacing:-.075em;margin:0;font-weight:800}
+.section-intro{max-width:260px;color:#8d8d8d;line-height:1.6;font-size:13px}
+.video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.video-card{display:block;min-width:0}
+.thumb{aspect-ratio:16/10;background:#151515;position:relative;overflow:hidden;border:1px solid #262626}
+.thumb::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 25%,#353535 0,transparent 34%),linear-gradient(135deg,#1c1c1c,#080808 70%);transition:transform .7s var(--ease)}
+.video-card:nth-child(2) .thumb::before{background:radial-gradient(ellipse at 30% 75%,#3c3c3c 0,transparent 35%),linear-gradient(45deg,#090909,#202020)}
+.video-card:nth-child(3) .thumb::before{background:repeating-linear-gradient(135deg,#111 0 2px,#171717 2px 4px)}
+.video-card:nth-child(4) .thumb::before{background:radial-gradient(ellipse at 50% 50%,#363636 0,transparent 25%),linear-gradient(120deg,#070707,#252525)}
+.video-card:hover .thumb::before{transform:scale(1.06)}
+.thumb-word{position:absolute;left:6%;top:50%;transform:translateY(-50%);font-size:clamp(35px,6vw,82px);font-weight:900;letter-spacing:-.09em;line-height:.8;z-index:1}
+.thumb-word em{font-style:normal;color:transparent;-webkit-text-stroke:1px #eee}
+.play{position:absolute;right:18px;bottom:18px;width:42px;height:42px;border:1px solid #777;border-radius:50%;display:grid;place-items:center;background:#08080880;transition:background .2s,color .2s}
+.video-card:hover .play{background:white;color:black}
+
+.video-card .thumb{display:block}
+.video-card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0009,transparent 60%);pointer-events:none}
+.video-card .thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(1);transition:transform .7s var(--ease),filter .5s}
+.video-card:hover .thumb img{transform:scale(1.045);filter:grayscale(.35)}
+.video-card .thumb .thumb-word{font-size:clamp(18px,2.5vw,32px);letter-spacing:-.04em;top:auto;bottom:18px;left:18px;transform:none;text-shadow:0 2px 18px #000}
+.video-status{grid-column:1/-1;padding:28px;border:1px solid #292929;color:#aaa;font-size:13px;line-height:1.7}
+
+.video-meta{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #303030}
+.video-meta h3{font-size:16px;font-weight:500;margin:0 0 6px}
+.video-meta p,.video-number{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:#777;margin:0}
+.video-number{padding-top:3px}
+.all-videos{margin-top:30px;display:flex;justify-content:flex-end}
+.manifesto{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.manifesto-copy{font-size:clamp(24px,3.3vw,43px);line-height:1.2;letter-spacing:-.04em;max-width:660px;margin:0}
+.manifesto-copy span{color:#6c6c6c}
+.manifesto-side{padding-top:8px;max-width:320px;margin-left:auto;color:#888;font-size:13px;line-height:1.8}
+.manifesto-side .big-mark{font-size:72px;font-weight:900;letter-spacing:-.1em;color:#eee;line-height:1;margin-bottom:28px}
+.channel-cta{padding:90px 0 105px;border-top:1px solid var(--line);text-align:center;position:relative;overflow:hidden}
+.channel-cta .eyebrow{margin-bottom:24px}
+.channel-cta h2{font-size:clamp(54px,10vw,132px);margin-bottom:34px}
+.channel-cta h2 span{color:transparent;-webkit-text-stroke:1px #f2f2ef}
+.channel-cta p{color:#8c8c8c;font-size:14px;margin:0 auto 28px;max-width:400px;line-height:1.7}
+.footer{border-top:1px solid var(--line);padding:24px 0 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#747474;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.footer-links{display:flex;gap:20px}.footer a:hover{color:white}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.cursor-glow{position:absolute;width:300px;height:300px;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#fff 0,transparent 70%);opacity:.035;transform:translate(-50%,-50%);z-index:1}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+@media(max-width:700px){
+ .wrap{width:calc(100% - 36px)}.nav{height:66px}.navlinks{display:none;position:absolute;top:65px;left:-18px;right:-18px;background:#0a0a0a;border-bottom:1px solid var(--line);padding:24px 18px;flex-direction:column;align-items:flex-start;gap:22px}.navlinks.open{display:flex}.menu-toggle{display:block}
+ .hero{min-height:calc(92svh - 66px);padding:65px 0 75px}.hero-top{font-size:8px;letter-spacing:1.3px}.hero-title{font-size:clamp(67px,17vw,120px);margin-bottom:28px}.hero-mark{width:56vw;right:-12%;top:15%;opacity:.3}.hero-bottom{align-items:flex-start;flex-direction:column;gap:20px}.hero-copy{max-width:310px}.scroll-note{bottom:22px}
+ .section{padding:76px 0}.section-head{align-items:flex-start;flex-direction:column;margin-bottom:28px}.section-intro{max-width:360px}.video-grid{grid-template-columns:1fr;gap:26px}.thumb-word{font-size:clamp(48px,13vw,78px)}
+ .manifesto{grid-template-columns:1fr;gap:28px}.manifesto-side{margin:0}.manifesto-side .big-mark{font-size:55px}.channel-cta{padding:75px 0}.footer{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<header class="wrap nav">
+  <a class="brand" href="#top" aria-label="SplitMind início">SPLITMIND<span>®</span></a>
+  <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  <nav class="navlinks" aria-label="Navegação principal">
+    <a href="#videos">Vídeos</a><a href="#manifesto">Sobre</a><a href="#canal" class="nav-cta">Acessar canal ↗</a>
+  </nav>
+</header>
+<main id="top">
+  <section class="wrap hero">
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="hero-mark" aria-hidden="true"><i></i></div>
+    <div class="hero-top"><span><span class="live-dot"></span>Um canal. Outras perspectivas.</span><span>Est. 20— / Internet</span></div>
+    <h1 class="hero-title"><span class="line"><span>SPLIT</span></span><span class="line"><span class="outline">MIND.</span></span></h1>
+    <div class="hero-bottom">
+      <p class="hero-copy"><strong>Nem tudo é o que parece.</strong><br>Vídeos, ideias e experiências vistos de um ângulo diferente.</p>
+      <div class="hero-actions"><a class="btn" href="#videos">Explorar vídeos <span class="arrow">↘</span></a><a class="btn secondary" href="#manifesto">Conheça a ideia <span class="arrow">↗</span></a></div>
+    </div>
+    <div class="scroll-note">Role para explorar</div>
+  </section>
+  <section class="section" id="videos">
+    <div class="wrap">
+      <div class="section-head reveal"><div><p class="eyebrow">01 / Seleção</p><h2>Em destaque<span style="color:#666">.</span></h2></div><p class="section-intro">Os vídeos públicos mais recentes do canal aparecem aqui automaticamente. Quando você publicar no YouTube, a seleção será atualizada.</p></div>
+      <div class="video-grid" id="video-grid" aria-live="polite">
+        <div class="video-card"><div class="thumb"><div class="thumb-word">LOADING<br><em>VIDEOS</em></div></div><div class="video-meta"><div><h3>Carregando vídeos do canal...</h3><p>Conectando ao YouTube</p></div></div></div>
+      </div>
+      <div class="all-videos reveal"><a class="btn secondary" href="https://www.youtube.com/@SplittMind" target="_blank" rel="noopener">Ver todos os vídeos <span class="arrow">↗</span></a></div>
+    </div>
+  </section>
+  <section class="section" id="manifesto">
+    <div class="wrap manifesto">
+      <div class="reveal"><p class="eyebrow">02 / A ideia</p><h2>Uma mente.<br>Mais de um<br><span style="color:#666">ângulo.</span></h2></div>
+      <div class="reveal"><p class="manifesto-copy">O mundo não cabe em uma única perspectiva. <span>O SplitMind existe para explorar o que acontece quando você olha de novo.</span></p><div class="manifesto-side"><div class="big-mark">S/M.</div><p>Conteúdo autoral. Curiosidade sem ruído. Uma identidade feita para quem gosta de enxergar além da superfície.</p></div></div>
+    </div>
+  </section>
+  <section class="channel-cta" id="canal">
+    <div class="wrap reveal"><p class="eyebrow">03 / Continue a experiência</p><h2>SEE YOU<br><span>ON THE OTHER SIDE.</span></h2><p>O próximo vídeo começa onde esta página termina.</p><a class="btn" href="https://www.youtube.com/@SplittMind?sub_confirmation=1" target="_blank" rel="noopener">Inscrever-se no canal <span class="arrow">↗</span></a></div>
+  </section>
+</main>
+<footer class="wrap footer">
+  <a class="brand" href="#top">SPLITMIND<span>®</span></a>
+  <span>© <span id="year"></span> SplitMind. Todos os direitos reservados.</span>
+  <div class="footer-links"><a href="https://www.youtube.com/@SplittMind" target="_blank" rel="noopener">YouTube ↗</a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="#top">Voltar ao topo ↑</a></div>
+</footer>
+<script>
+const CHANNEL_URL='https://www.youtube.com/@SplittMind';
+const CHANNEL_HANDLE='@SplittMind';
+const menuButton=document.querySelector('.menu-toggle');
+const nav=document.querySelector('.navlinks');
+menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'×':'☰'});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='☰'}));
+document.getElementById('year').textContent=new Date().getFullYear();
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const hero=document.querySelector('.hero'),glow=document.querySelector('.cursor-glow');
+hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=hero.getBoundingClientRect();glow.style.left=(e.clientX-r.left)+'px';glow.style.top=(e.clientY-r.top)+'px'});
+
+const grid=document.getElementById('video-grid');
+const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function showVideoError(){
+  grid.innerHTML='<div class="video-status">Não foi possível carregar a lista automaticamente agora. Você ainda pode acessar todos os vídeos diretamente pelo canal.<br><br><a class="btn secondary" href="'+CHANNEL_URL+'/videos" target="_blank" rel="noopener">Abrir vídeos no YouTube ↗</a></div>';
+}
+function renderVideos(items){
+  if(!items||!items.length){showVideoError();return}
+  grid.innerHTML=items.slice(0,8).map((item,index)=>{
+    const link=item.link||CHANNEL_URL;
+    const title=escapeHTML(item.title||'Vídeo do SplitMind');
+    const date=item.pubDate?new Date(item.pubDate):null;
+    const dateLabel=date&&!isNaN(date)?date.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}):'YouTube';
+    const id=item.guid?.match(/yt:video:([^&]+)/)?.[1]||item.link?.match(/[?&]v=([^&]+)/)?.[1]||item.link?.match(/youtu\.be\/([^?&]+)/)?.[1];
+    const thumb=item.thumbnail||(id?'https://i.ytimg.com/vi/'+encodeURIComponent(id)+'/hqdefault.jpg':'');
+    return '<a class="video-card reveal visible" href="'+escapeHTML(link)+'" target="_blank" rel="noopener"><div class="thumb">'+(thumb?'<img loading="lazy" src="'+escapeHTML(thumb)+'" alt="" onerror="this.style.display=\'none\'">':'')+'<div class="thumb-word">'+String(index+1).padStart(3,'0')+' <em>/ SPLITMIND</em></div><span class="play">↗</span></div><div class="video-meta"><div><h3>'+title+'</h3><p>Publicado em '+escapeHTML(dateLabel)+'</p></div><span class="video-number">'+String(index+1).padStart(3,'0')+'</span></div></a>';
+  }).join('');
+}
+async function loadVideos(){
+  try{
+    // Resolve the channel's canonical ID from its public page through a CORS proxy.
+    const pageURL='https://www.youtube.com/'+CHANNEL_HANDLE;
+    const proxyURL='https://api.allorigins.win/raw?url='+encodeURIComponent(pageURL);
+    const pageResponse=await fetch(proxyURL,{signal:AbortSignal.timeout(12000),cache:'no-store'});
+    if(!pageResponse.ok)throw new Error('Channel lookup failed');
+    const source=await pageResponse.text();
+    const channelId=source.match(/"channelId"\s*:\s*"(UC[\w-]+)"/)?.[1]||source.match(/youtube\.com\/channel\/(UC[\w-]+)/)?.[1];
+    if(!channelId)throw new Error('Channel ID unavailable');
+    const feed='https://www.youtube.com/feeds/videos.xml?channel_id='+encodeURIComponent(channelId);
+    const rssUrl='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed);
+    const feedResponse=await fetch(rssUrl,{signal:AbortSignal.timeout(12000),cache:'no-store'});
+    if(!feedResponse.ok)throw new Error('Feed unavailable');
+    const data=await feedResponse.json();
+    if(data.status!=='ok'||!Array.isArray(data.items))throw new Error('Feed parse failed');
+    renderVideos(data.items);
+  }catch(error){showVideoError();console.warn('SplitMind: não foi possível atualizar os vídeos automaticamente.',error)}
+}
+loadVideos();
+</script>
+</body>
+</html>
